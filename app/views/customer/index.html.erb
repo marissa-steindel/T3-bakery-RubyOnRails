@@ -1,0 +1,8 @@
+<h1>Customers Collection</h1>
+<% @customer.each do |c|%>
+  <h2><%= c.name %></h2>
+  <p>username: <%= c.username %></p>
+  <p>password: <%= c.password %></p>
+  <p><%= c.salt %></p>
+  <p>province: <%= c.province.name %></p>
+<% end %>
