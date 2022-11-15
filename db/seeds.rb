@@ -9,6 +9,10 @@
 Customer.destroy_all
 Province.destroy_all
 
+require "csv"
+csv_file = Rails.root.join("db/salestax.csv")
+csv_data = File.read(csv_file)
+salestax_csv_data = CSV.parse(csv_data, headers: true)
 
 province_array = [
   'British Columbia',
@@ -25,14 +29,15 @@ province_array = [
   'Nunavut'
 ]
 
-province_array.each do |p|
+salestax_csv_data.each do |row|
+  puts row["code"]
   seed = Province.create(
-    name: p,
-    GST: Faker::Number.decimal,
-    PST: Faker::Number.decimal,
-    HST: Faker::Number.decimal
+    name: row["code"],
+    PST: row["PST"],
+    GST: row["GST"],
+    HST: row["HST"]
   )
-  1..3.times do
+  rand(1..3).times do
     customer = Customer.create(
       name: Faker::Name.name,
       address: Faker::Address.street_address,
@@ -47,28 +52,15 @@ end
 
 # puts Province.all.inspect
 
-Province.all.each do |p|
- puts "Name: #{p.name}"
- puts "GST: #{p.GST}"
- puts "HST: #{p.HST}"
- puts "PST: #{p.PST}"
+Province.all.each do |prov|
+ puts "Name: #{prov.name}"
+ puts "GST: #{prov.GST}"
+ puts "HST: #{prov.HST}"
+ puts "PST: #{prov.PST}"
  puts
 end
 
 
-# 10.times do
-#   customer = Customer.create(
-#     name: Faker::Name.name,
-#     address: Faker::Address.street_address,
-#     username: Faker::Lorem.word,
-#     password: Faker::Internet.password
-#     # province: Province.sample
-#   )
-#   customer.save
-#   customer.province = Province.all.sample
-
-#   puts "#{customer.name} created"
-# end
 
 # # traverse the parsed products CSV file
 # products.each do |product|
