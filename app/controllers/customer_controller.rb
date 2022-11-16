@@ -1,6 +1,9 @@
 class CustomerController < ApplicationController
   def index
     @customers = Customer.all
-    @provinces = Province.all
+  end
+
+  def show
+    @customer = Cusomter.find(params[:id])
   end
 end
