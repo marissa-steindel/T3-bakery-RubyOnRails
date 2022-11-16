@@ -8,6 +8,14 @@
 
 Customer.destroy_all
 Province.destroy_all
+AdminUser.destroy_all
+
+if AdminUser.count.nil?
+  AdminUser.create(
+    :email => 'admin@example.com',
+    :password => 'password'
+  )
+end
 
 require "csv"
 csv_file = Rails.root.join("db/salestax.csv")
