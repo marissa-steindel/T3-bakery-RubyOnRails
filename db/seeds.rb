@@ -6,6 +6,20 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+
+products = ["rustic sourdough", "flax & pepitas", "jalapeno cheddar", "cracked rye", "multigrain", "chocolate cherry hazlenut", "lemon crinkle cookie", "blackberry hand pie", "blueberry peach galette", "parm spinach spiral"]
+
+Product.destroy_all
+products.each do |p|
+  new_prod = Product.create(name: p)
+end
+
+categories = ["loaf", "sweet pastry", "savoury pastry", "cookie", "cake", "muffin", "bun"]
+
+categories.each do |p|
+  new_cat = Category.create(name: p)
+end
+
 Customer.destroy_all
 Province.destroy_all
 AdminUser.destroy_all
