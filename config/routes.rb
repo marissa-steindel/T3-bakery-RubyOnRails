@@ -5,14 +5,14 @@ Rails.application.routes.draw do
   get 'products/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root "province#about"
-  get "about", to: "province#about"
-  get "contact", to: "province#contact"
+  root "provinces#about"
+  get "about", to: "provinces#about"
+  get "contact", to: "provinces#contact"
 
   get "customer/index"
-  get 'province/index'
-  get 'province/show'
-  get "/province/:id", to: "province#show"
+  get 'provinces/index'
+  get 'provinces/show'
+  get "/provinces/:id", to: "provinces#show"
 
   resources :customers
   resources :provinces

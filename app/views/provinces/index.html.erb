@@ -1,0 +1,30 @@
+<h1>Province Collection</h1>
+  <table>
+    <tr>
+      <th>Province</th>
+      <th>GST</th>
+      <th>PST</th>
+      <th>HST</th>
+    </tr>
+    <% @provinces.each do |p|%>
+      <tr>
+        <td><%= link_to p.name, p %></td>
+        <td>
+          <% unless p.GST.nil? || p.GST == 0 %>
+            <p>GST: <%= p.GST.to_i %>%</p>
+          <% end %>
+        </td>
+        <td>
+          <% unless p.PST.nil? || p.PST == 0 %>
+            <p>PST: <%= p.PST.to_i %>%</p>
+          <% end %>
+        </td>
+        <td>
+          <% unless p.HST.nil? || p.HST == 0 %>
+            <p>HST: <%= p.HST.to_i %>%</p>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+  </table>
