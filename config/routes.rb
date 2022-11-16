@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root "customer#index"
+  root "province#about"
+  get "about", to: "province#about"
+  get "contact", to: "province#contact"
+
   get "customer/index"
   get 'province/index'
   get 'province/show'
