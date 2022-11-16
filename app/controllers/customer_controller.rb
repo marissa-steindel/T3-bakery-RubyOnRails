@@ -4,6 +4,6 @@ class CustomerController < ApplicationController
   end
 
   def show
-    @customer = Cusomter.find(params[:id])
+    @customer = Customer.find(params[:id])
   end
 end
