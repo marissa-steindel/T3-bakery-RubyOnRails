@@ -1,0 +1,17 @@
+<%= form_with(model: product, local:true) do |f| %>
+  <div>
+    <h3><%= link_to product.name, product %></h3>
+  </div>
+  <div>
+    <p><%= product.description %></p>
+  </div>
+  <div>
+    <p>price: <%= number_to_currency product.price.to_i/100.0 %></p>
+  </div>
+  <div>
+    <p>Added: <%= product.created_at %></p>
+    <p>Updated: <%= product.updated_at %></p>
+  </div>
+  <%= f.submit %>
+<% end %>
+

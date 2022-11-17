@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'categories/index'
   get 'categories/show'
   get 'products/index'
-  get 'products/show'
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  get 'products/:id', to: "products#show", as: "product"
   root "provinces#about"
   get "about", to: "provinces#about"
   get "contact", to: "provinces#contact"
