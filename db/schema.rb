@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_161913) do
 
   create_table "provinces", force: :cascade do |t|
     t.string "name"
+    t.string "code"
     t.decimal "GST"
     t.decimal "PST"
     t.decimal "HST"
