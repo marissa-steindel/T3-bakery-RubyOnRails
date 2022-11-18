@@ -3,6 +3,9 @@
     <h3><%= link_to product.name, product %></h3>
   </div>
   <div>
+    <% if product.image.present? %>
+      <%= image_tag product.image %>
+    <% end %>
     <p><%= product.description %></p>
   </div>
   <div>
