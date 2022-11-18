@@ -1,63 +1,39 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
-
-products = ["rustic sourdough", "flax & pepitas", "jalapeno cheddar", "cracked rye", "multigrain", "chocolate cherry hazlenut", "lemon crinkle cookie", "blackberry hand pie", "blueberry peach galette", "parm spinach spiral"]
-
-Product.destroy_all
-products.each do |p|
-  new_prod = Product.create(name: p)
-end
-
-categories = ["loaf", "sweet pastry", "savoury pastry", "cookie", "cake", "muffin", "bun"]
-
-categories.each do |p|
-  new_cat = Category.create(name: p)
-end
+require "csv"
 
 Customer.destroy_all
 Province.destroy_all
+Product.destroy_all
+Category.destroy_all
 AdminUser.destroy_all
 
-if AdminUser.count.nil?
+if AdminUser.count.nil? || AdminUser.count == 0
   AdminUser.create(
     :email => 'admin@example.com',
     :password => 'password'
-  )
+    )
 end
 
-require "csv"
-csv_file = Rails.root.join("db/salestax.csv")
-csv_data = File.read(csv_file)
-salestax_csv_data = CSV.parse(csv_data, headers: true)
+# # salestax_csv_file = Rails.root.join("db/salestax.csv")
+# # salestax_csv_data = File.read(csv_file)
+# # salestax_csv_data = CSV.parse(csv_data, headers: true)
 
-province_array = [
-  'British Columbia',
-  'Alberta',
-  'Saskatchewan',
-  'Manitoba',
-  'Ontario',
-  'Quebec',
-  'Nova Scotia',
-  'Newfoundland',
-  'New Brunswick',
-  'Yukon',
-  'Northwest Territories',
-  'Nunavut'
-]
+salestax_csv_data =  CSV.parse(File.read(Rails.root.join("db/salestax.csv")), headers: true)
+
+# salestax_csv_data.each do |row|
+#     puts   row["province"]
+#     puts   row["code"]
+#     puts    row["PST"]
+#     puts    row["GST"]
+#     puts    row["HST"]
+# end
 
 salestax_csv_data.each do |row|
-  puts row["code"]
-  seed = Province.create(
-    name: row["code"],
-    PST: row["PST"],
-    GST: row["GST"],
-    HST: row["HST"]
+  province = Province.create(
+    name:   row["province"],
+    code:   row["code"],
+    PST:    row["PST"],
+    GST:    row["GST"],
+    HST:    row["HST"]
   )
   rand(1..3).times do
     customer = Customer.create(
@@ -65,22 +41,44 @@ salestax_csv_data.each do |row|
       address: Faker::Address.street_address,
       username: Faker::Lorem.word,
       password: Faker::Internet.password,
-      province: seed
+      province: province
     )
-    puts "#{customer.name} from #{seed.name} created"
+    puts "#{customer.name} from #{province.name} created"
   end
   # puts seed.inspect
 end
 
-# puts Province.all.inspect
-
 Province.all.each do |prov|
- puts "Name: #{prov.name}"
- puts "GST: #{prov.GST}"
- puts "HST: #{prov.HST}"
- puts "PST: #{prov.PST}"
- puts
+  puts "Name: #{prov.name}"
+  puts "GST: #{prov.GST}"
+  puts "HST: #{prov.HST}"
+  puts "PST: #{prov.PST}"
+  puts
 end
+
+
+product_csv_data =  CSV.parse(File.read(Rails.root.join("db/products.csv")), headers: true)
+
+product_csv_data.each do |p|
+    # puts p["name"]
+    # puts p["price"]
+    # puts p["description"]
+
+  new_prod = Product.create(
+    name: p["name"],
+    price: p["price"].to_i,
+    description: p["description"]
+  )
+end
+
+categories = ["loaf", "sweet", "savoury pastry", "cookie", "cake", "muffin", "bun"]
+
+categories.each do |p|
+  new_cat = Category.create(name: p)
+end
+
+
+
 
 
 
@@ -100,4 +98,6 @@ end
 #   #       puts "The #{column} property #{error}."
 #   #     end
 #   #   end
-#   # endAdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+#   # end
+
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
