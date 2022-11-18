@@ -1,17 +1,19 @@
 require "csv"
 
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
 Customer.destroy_all
 Province.destroy_all
 Product.destroy_all
 Category.destroy_all
-AdminUser.destroy_all
+# AdminUser.destroy_all
 
-if AdminUser.count.nil? || AdminUser.count == 0
-  AdminUser.create(
-    :email => 'admin@example.com',
-    :password => 'password'
-    )
-end
+# if AdminUser.count.nil? || AdminUser.count == 0
+#   AdminUser.create(
+#     :email => 'admin@example.com',
+#     :password => 'password'
+#     )
+# end
 
 # # salestax_csv_file = Rails.root.join("db/salestax.csv")
 # # salestax_csv_data = File.read(csv_file)
@@ -71,7 +73,7 @@ product_csv_data.each do |p|
   )
 end
 
-categories = ["loaf", "sweet", "savoury pastry", "cookie", "cake", "muffin", "bun"]
+categories = ["loaf", "sweet", "savoury", "pastry", "cookie", "cake", "muffin", "bun"]
 
 categories.each do |p|
   new_cat = Category.create(name: p)
