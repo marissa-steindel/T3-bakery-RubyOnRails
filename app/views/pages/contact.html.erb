@@ -2,8 +2,9 @@
 
 <form id="contactForm" action="index.html" method="post">
 <div id="preorder">
-    <p>Interested in a pre-order or have a catering inquiry?</p>
-    <p>Give us a shout! We love to hear your feedback.</p>
+    <%# <p>Interested in a pre-order or have a catering inquiry?</p>
+    <p>Give us a shout! We love to hear your feedback.</p> %>
+    <p> <%= Page.where(:name => "Contact").first.content %> </p>
 </div>
 <div id="contactInfo">
 
