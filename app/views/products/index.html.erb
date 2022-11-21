@@ -1,2 +1,8 @@
 <h1>Products Collection</h1>
 <%= render @products %>
+
+<nav class="pagination">
+  <p>
+    <%= paginate @products %>
+  </p>
+</nav>

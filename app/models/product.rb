@@ -6,4 +6,7 @@ class Product < ApplicationRecord
   # required for active storage
   has_one_attached :image
   accepts_nested_attributes_for :product_categories, allow_destroy: true
+
+  # pagination
+  paginates_per 5
 end
