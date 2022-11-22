@@ -1,20 +1,13 @@
-<%= form_with(model: product, local:true) do |f| %>
-  <div>
-    <h3><%= link_to product.name, product %></h3>
-  </div>
-  <div>
-    <% if product.image.present? %>
+  <h3><%= link_to product.name, product %></h3>
+  <% if product.image.present? %>
       <%= image_tag product.image %>
-    <% end %>
-    <p><%= product.description %></p>
-  </div>
-  <div>
-    <p>price: <%= number_to_currency product.price.to_i/100.0 %></p>
-  </div>
-  <div>
-    <p>Added: <%= product.created_at %></p>
-    <p>Updated: <%= product.updated_at %></p>
-  </div>
-  <%= f.submit %>
-<% end %>
+  <% end %>
+  <p><%= product.description %></p>
+  <p>price: <%= number_to_currency product.price.to_i/100.0 %></p>
+
+  <% if @cart_contents.include?(product) %>
+    <p><%= button_to "remove from cart", remove_from_cart_path(product.id), method: :delete %></p>
+  <% else %>
+    <p><%= button_to "add to cart", add_to_cart_path(product.id), method: :post %></p>
+  <% end %>
 
