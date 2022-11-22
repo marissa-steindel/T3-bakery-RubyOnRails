@@ -1,4 +1,19 @@
 <h1>Products Collection</h1>
+
+<% if @cart_contents.empty?%>
+  <p>No items in cart.</p>
+<% else %>
+  <summary>Shopping Cart</summary>
+  <ul>
+    <% @cart_contents.each do |p| %>
+      <li> <%= p.name %> </li>
+    <% end %>
+  </ul>
+<% end %>
+<%# <%=debug session[:visit_count]%>
+<%=debug session[:cart]%>
+
+
 <%= render @products %>
 
 <nav class="pagination">
