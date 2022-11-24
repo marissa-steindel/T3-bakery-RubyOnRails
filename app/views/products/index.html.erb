@@ -1,5 +1,10 @@
 <h1>Products Collection</h1>
 
+<p>Filter products:</p>
+<%= select_tag :category, options_from_collection_for_select(Category.all, 'id', 'name') %>
+<p>Search products:</p>
+<%= render "searchform" %>
+
 <% if @cart_contents.empty?%>
   <p>No items in cart.</p>
 <% else %>

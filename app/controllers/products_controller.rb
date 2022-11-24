@@ -12,6 +12,10 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def search_results
+    @products = Product.where( 'name LIKE ?', "%#{params[:query]}%" )
+  end
+
   def add_to_cart
     id = params[:id].to_i
     # add the product id parameter to the end of the cart array stored in the sessions hash with a key of cart
