@@ -12,9 +12,14 @@ Rails.application.routes.draw do
   get 'categories/show'
 
   get 'products/index'
-  get 'products/:id', to: "products#show", as: "product"
+  # get 'products/:id', to: "products#show", as: "product"
   post 'products/add_to_cart/:id', to: "products#add_to_cart", as: "add_to_cart"
   delete 'products/remove_from_cart/:id', to: "products#remove_from_cart", as: "remove_from_cart"
+  resources 'products', only: [:index, :show] do
+    collection do
+      get 'search_results'
+    end
+  end
 
   get "customer/index"
 
