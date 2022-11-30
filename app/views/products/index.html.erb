@@ -1,4 +1,4 @@
-<h1>Products Collection</h1>
+<h1 class="title is-3">Products Collection</h1>
 
 <p>Filter products:</p>
 <%= select_tag :category, options_from_collection_for_select(Category.all, 'id', 'name') %>
