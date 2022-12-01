@@ -1,22 +1,40 @@
 <h1 class="title is-3">Products Collection</h1>
 
-<p>Filter products by category:</p>
-<%= select_tag :category, options_from_collection_for_select(Category.all, 'id', 'name') %>
-<p>Search products:</p>
-<%= render "searchform" %>
-
-<% if @cart_contents.empty?%>
-  <p>No items in cart.</p>
-<% else %>
-  <summary>Shopping Cart</summary>
-  <ul>
-    <% @cart_contents.each do |p| %>
-      <li> <%= p.name %> </li>
+<div class="block">
+  <p>Filter products by category:</p>
+  <%= select_tag :category, options_from_collection_for_select(Category.all, 'id', 'name') %>
+  <%# select_tag :category, options_from_collection_for_select(Category.all, 'name', 'name'), :onChange => filter_by_category() %>
+  <nav class="navbar">
+    <% Category.all.each do |c| %>
+      <%= link_to c.name, "#", :class=>"navbar-item" %>
     <% end %>
-  </ul>
-<% end %>
-<%# <%=debug session[:visit_count]%>
-<%=debug session[:cart]%>
+  </nav>
+</div>
+
+<div class="block">
+    <p>Search products:</p>
+    <%= render "searchform" %>
+</div>
+
+<div class="block">
+  <% if @cart_contents.empty?%>
+    <p>No items in cart.</p>
+  <% else %>
+    <h3>Shopping Cart:</h3>
+    <ul>
+      <% @cart_contents.each do |p| %>
+        <li> <%= p.name %> - <%= number_to_currency p.price.to_i/100.0 %> each</li>
+      <% end %>
+    </ul>
+    <%# button_to "Checkout", "#" %>
+  <% end %>
+</div>
+
+<div class="block">
+  <%# <%=debug session[:visit_count]%>
+  <h3>Debug session[:cart]</h3>
+  <%=debug session[:cart]%>
+</div>
 
 
 <%= render @products %>

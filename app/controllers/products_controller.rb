@@ -1,8 +1,9 @@
 class ProductsController < ApplicationController
-  # before any actions are performed, initialize the visit count session
-  before_action :initialize_session
+
+  # before any controller actions are performed, run the following (private) functions
+  before_action :initialize_session #create empty cart array, or visit count set to 0, if not already initialized
   before_action :increment_visit_count, only: [:index, :about]
-  before_action :load_cart
+  before_action :load_cart_variable
 
   def index
     @products = Product.all.page(params[:page])
@@ -13,7 +14,13 @@ class ProductsController < ApplicationController
   end
 
   def search_results
-    @products = Product.where( 'name LIKE ?', "%#{params[:query]}%" )
+    @products = Product.where( 'name LIKE ?', "%#{params[:query]}%" ).page(params[:page])
+    render products_index_path
+  end
+
+  def filter_by_category(category)
+    @products = Product.where( 'category LIKE ?', category ).page(params[:page])
+    render products_index_path
   end
 
   def add_to_cart
@@ -37,7 +44,7 @@ class ProductsController < ApplicationController
     session[:cart] ||= []
   end
 
-  def load_cart
+  def load_cart_variable
     @cart_contents = Product.find(session[:cart])
   end
 
