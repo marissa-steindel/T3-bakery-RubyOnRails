@@ -1,14 +1,12 @@
-<h1>Search Results</h1>
+<h1 class="title is-4">Search Results</h1>
 
-<p>You searched for '<%= params[:query] %>'.</p>
-<p><%= pluralize(@products.size, "result")%> found.</p>
+<div class="block">
+  <p>You searched for '<%= params[:query] %>'.</p>
+  <p><%= pluralize(@products.size, "result")%> found.</p>
+</div>
 
 <% if @products.empty? %>
   <p>No products found.</p>
 <% else %>
-  <ul>
-    <% @products.each do |product| %>
-      <li> <%= link_to product.name, product %> </li>
-    <% end %>
-  </ul>
+  <%= render @products %>
 <% end %>
