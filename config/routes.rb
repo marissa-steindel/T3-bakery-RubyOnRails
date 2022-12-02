@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'checkout/checkout'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   get 'categories/show'
 
   get 'products/index'
+  get "checkout", to: "products#checkout", as: "checkout"
   # get 'products/:id', to: "products#show", as: "product"
   post 'products/add_to_cart/:id', to: "products#add_to_cart", as: "add_to_cart"
   delete 'products/remove_from_cart/:id', to: "products#remove_from_cart", as: "remove_from_cart"

@@ -36,6 +36,10 @@ class ProductsController < ApplicationController
     redirect_to products_index_path
   end
 
+  def checkout
+
+  end
+
   private
   def initialize_session
     session[:visit_count] ||= 0
