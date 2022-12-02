@@ -1,12 +1,32 @@
 <h1 class="title is-4">Search Results</h1>
 
 <div class="block">
-  <p>You searched for '<%= params[:query] %>'.</p>
-  <p><%= pluralize(@products.size, "result")%> found.</p>
+  <h3>Debug GET[]</h3>
+  <p><%= params %></p>
+  <pre><%= @products.inspect %></pre>
 </div>
 
-<% if @products.empty? %>
-  <p>No products found.</p>
-<% else %>
-  <%= render @products %>
-<% end %>
+<div class="block">
+  <% if params[:query].blank? %>
+    <p>Please try a valid search.</p>
+    <%= link_to "Back", products_index_path %>
+  <% else %>
+    <p>You searched for '<%= params[:query] %>'.</p>
+      <% unless params[:category].blank? %>
+        <p>Search filtered by category: <%= Category.find(params[:category]).name %></p>
+      <% end %>
+
+    <% if @products.empty?%>
+      <p>No products found.</p>
+    <% else %>
+      <p><%= pluralize(@products.size, "result")%> found.</p>
+      <%= link_to "Back", products_index_path %>
+      <div class="block">
+        <%= render @products %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= link_to "Back", products_index_path %>
+</div>
+
+

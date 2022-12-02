@@ -1,5 +1,6 @@
 <h1 class="title is-3">Products Collection</h1>
 
+<%# category filter %>
 <div class="block">
   <p>Filter products by category:</p>
   <%= select_tag :category, options_from_collection_for_select(Category.all, 'id', 'name') %>
@@ -11,11 +12,13 @@
   </nav>
 </div>
 
+<%# search form %>
 <div class="block">
     <p>Search products:</p>
     <%= render "searchform" %>
 </div>
 
+<%# display cart contents %>
 <div class="block">
   <% if @cart_contents.empty?%>
     <p>No items in cart.</p>
@@ -30,10 +33,13 @@
   <% end %>
 </div>
 
+<%# debugging %>
 <div class="block">
   <%# <%=debug session[:visit_count]%>
   <h3>Debug session[:cart]</h3>
   <%=debug session[:cart]%>
+  <h3>Debug params</h3>
+  <%= params %>
 </div>
 
 

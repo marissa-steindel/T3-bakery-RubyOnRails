@@ -14,13 +14,11 @@ class ProductsController < ApplicationController
   end
 
   def search_results
-    @products = Product.where( 'name LIKE ?', "%#{params[:query]}%" ).page(params[:page])
-    render products_index_path
+    @products = Product.where("name LIKE ?", "%#{params[:query]}%")
   end
 
   def filter_by_category(category)
-    @products = Product.where( 'category LIKE ?', category ).page(params[:page])
-    render products_index_path
+    @products = Product.where( 'category LIKE ?', "%#{params[:category]}%" )
   end
 
   def add_to_cart
