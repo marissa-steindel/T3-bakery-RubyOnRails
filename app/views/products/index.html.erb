@@ -19,29 +19,11 @@
 </div>
 
 <%# display cart contents %>
-<div class="block">
-  <% if @cart_contents.empty?%>
-    <p>No items in cart.</p>
-  <% else %>
-    <h3>Shopping Cart:</h3>
-    <ul>
-      <% @cart_contents.each do |p| %>
-        <li> <%= p.name %> - <%= number_to_currency p.price.to_i/100.0 %> each</li>
-      <% end %>
-    </ul>
-    <%# button_to "Checkout", "#" %>
-  <% end %>
-</div>
-
-<%# debugging %>
-<div class="block">
-  <%# <%=debug session[:visit_count]%>
-  <h3>Debug session[:cart]</h3>
-  <%=debug session[:cart]%>
-  <h3>Debug params</h3>
-  <%= params %>
-</div>
-
+<% unless @cart_contents.empty?%>
+  <%= link_to "Checkout", checkout_path %>
+  <%# button_to "Checkout", checkout_path, method: :post %>
+<% end %>
+<%= render "cart_contents"%>
 
 <%= render @products %>
 
