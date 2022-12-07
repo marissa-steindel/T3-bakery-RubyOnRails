@@ -18,14 +18,31 @@ class ProductsController < ApplicationController
   end
 
   def filter_by_category(category)
+    # retrieve from the product_categories join table
+    # select product_id from product_categories where category_id is X
+    # product.id = product_category= product_id
+
     @products = Product.where( 'category LIKE ?', "%#{params[:category]}%" )
+    # Product.join(:product_categories)
+    # SELECT * FROM products JOIN product_categories ON product.id = product_categories.product_id
+
+    # Book.joins(:reviews)
+    # SELECT * FROM books JOIN reviews ON reviews.book_id = books.id
   end
 
   def add_to_cart
-    id = params[:id].to_i
+    prod_key = params[:id].to_i
     # add the product id parameter to the end of the cart array stored in the sessions hash with a key of cart
     # add the id to cart, unless it is already there
     session[:cart] << params[:id].to_i unless session[:cart].include?(params[:id].to_i)
+    # if session[:cart].include?(prod_key)
+    #   # product is already in the cart, increment
+    #   session[:cart][:prod_key][:qty] += 1
+    # else
+    #   # product is not in the cart
+    #   session[:cart] << {prod_key: 1}
+    # end
+
     # prevent rails from trying to load up a view of the same name as the action
     redirect_to products_index_path
   end
@@ -44,10 +61,12 @@ class ProductsController < ApplicationController
   def initialize_session
     session[:visit_count] ||= 0
     session[:cart] ||= []
+    # session[:cart] ||= {}
   end
 
   def load_cart_variable
     @cart_contents = Product.find(session[:cart])
+    # @cart_contents = Product.find(session[:cart][:prod_key])
   end
 
   def increment_visit_count
