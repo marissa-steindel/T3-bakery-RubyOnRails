@@ -31,14 +31,14 @@ class ProductsController < ApplicationController
   end
 
   def add_to_cart
-    prod_key = params[:id].to_i
+    prod_key = params[:id] # is of datatype string
     # add the product id parameter to the end of the cart array stored in the sessions hash with a key of cart
     # add the id to cart, unless it is already there
     # session[:cart] << params[:id].to_i unless session[:cart].include?(params[:id].to_i)
-    if session[:cart].keys.include?(prod_key.to_s)
+    if session[:cart].keys.include?(prod_key)
       # if session[:cart].has_key?(prod_key)
           # product is already in the cart, increment
-        session[:cart][prod_key.to_s] += 1
+        session[:cart][prod_key] += 1
       else
         # product is not in the cart
         session[:cart][prod_key] = 1
@@ -49,18 +49,18 @@ class ProductsController < ApplicationController
   end
 
   def remove_from_cart
-    prod_key = params[:id].to_i
-    session[:cart].delete(prod_key.to_s)
+    prod_key = params[:id]
+    session[:cart].delete(prod_key)
 
     redirect_to products_index_path
   end
 
   def decrement_from_cart
-    prod_key = params[:id].to_i
-    if session[:cart][prod_key.to_s] == 1
-      session[:cart].delete(prod_key.to_s)
+    prod_key = params[:id]
+    if session[:cart][prod_key] == 1
+      session[:cart].delete(prod_key)
     else
-      session[:cart][prod_key.to_s] -= 1
+      session[:cart][prod_key] -= 1
     end
 
     redirect_to products_index_path
@@ -82,6 +82,11 @@ class ProductsController < ApplicationController
     # @cart_contents = Product.find(session[:cart])
     @cart_contents = Product.find(session[:cart].keys)
     # @cart_contents = Product.find(session[:cart][:prod_key])
+    @cart_subtotal = 0
+    session[:cart].each do |prod_id,qty|
+      price = Product.find(prod_id.to_i).price
+      @cart_subtotal += (price*qty)/100.0
+    end
   end
 
   def increment_visit_count
