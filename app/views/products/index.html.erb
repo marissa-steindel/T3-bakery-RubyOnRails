@@ -18,6 +18,19 @@
     <%= render "searchform" %>
 </div>
 
+
+<%# <p>session class: </p><%= session[:cart].class %>
+<%# <p>Initialize session: </p><%= session[:cart] = {1 => 1, 2 => 2} %>
+<%# <p>session[:cart].keys.class:</p><%= session[:cart].keys.class %>
+<%# <p>session[:cart].keys.first.class:</p><%= session[:cart].keys.first.class %>
+<%# <p>params[:id]:</p><%= params[:id] %>
+<%# <p>Inspect session: </p><%= session[:cart].inspect %>
+<%# <p>Session is empty?: </p><%= session[:cart].empty? %>
+<%# <p>Load @cart_contents: </p><% @cart_contents = Product.find(session[:cart].keys) %>
+<%# <p>@cart_contents is empty?: </p><%= @cart_contents.empty? %>
+<%# <p>Inspect @cart_contents: </p><%= Product.find(session[:cart].keys).inspect %>
+
+
 <%# display cart contents %>
 <% unless @cart_contents.empty?%>
   <%= link_to "Checkout", checkout_path %>

@@ -34,22 +34,35 @@ class ProductsController < ApplicationController
     prod_key = params[:id].to_i
     # add the product id parameter to the end of the cart array stored in the sessions hash with a key of cart
     # add the id to cart, unless it is already there
-    session[:cart] << params[:id].to_i unless session[:cart].include?(params[:id].to_i)
-    # if session[:cart].include?(prod_key)
-    #   # product is already in the cart, increment
-    #   session[:cart][:prod_key][:qty] += 1
-    # else
-    #   # product is not in the cart
-    #   session[:cart] << {prod_key: 1}
-    # end
+    # session[:cart] << params[:id].to_i unless session[:cart].include?(params[:id].to_i)
+    if session[:cart].keys.include?(prod_key.to_s)
+      # if session[:cart].has_key?(prod_key)
+          # product is already in the cart, increment
+        session[:cart][prod_key.to_s] += 1
+      else
+        # product is not in the cart
+        session[:cart][prod_key] = 1
+      end
 
     # prevent rails from trying to load up a view of the same name as the action
     redirect_to products_index_path
   end
 
   def remove_from_cart
-    id = params[:id].to_i
-    session[:cart].delete(id)
+    prod_key = params[:id].to_i
+    session[:cart].delete(prod_key.to_s)
+
+    redirect_to products_index_path
+  end
+
+  def decrement_from_cart
+    prod_key = params[:id].to_i
+    if session[:cart][prod_key.to_s] == 1
+      session[:cart].delete(prod_key.to_s)
+    else
+      session[:cart][prod_key.to_s] -= 1
+    end
+
     redirect_to products_index_path
   end
 
@@ -60,12 +73,14 @@ class ProductsController < ApplicationController
   private
   def initialize_session
     session[:visit_count] ||= 0
-    session[:cart] ||= []
-    # session[:cart] ||= {}
+    # session[:cart] ||= []
+    session[:cart] ||= Hash.new
   end
 
   def load_cart_variable
-    @cart_contents = Product.find(session[:cart])
+    # loads a set of objects from the db
+    # @cart_contents = Product.find(session[:cart])
+    @cart_contents = Product.find(session[:cart].keys)
     # @cart_contents = Product.find(session[:cart][:prod_key])
   end
 
