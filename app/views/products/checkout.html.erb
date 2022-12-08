@@ -2,6 +2,8 @@
 
 <%# cart contents %>
 <%= render "cart_contents"%>
+<%= select_tag :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province", :onchange => remote_function(:url => {:controller => 'controller', :action => 'action'}) %>
+
 
 <div class="block">
   <p><%= link_to "Log In", "/#" %></p>
