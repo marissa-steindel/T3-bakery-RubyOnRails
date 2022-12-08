@@ -38,7 +38,10 @@
 <% end %>
 <%= render "cart_contents"%>
 
-<%= render @products %>
+<%# render @products %>
+<%= render partial: 'product',
+            collection: @products,
+            locals: {show_page: false} %>
 
 <nav class="pagination">
   <p>
