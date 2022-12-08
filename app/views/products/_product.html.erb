@@ -1,7 +1,11 @@
 <div class="block">
 
     <%# product details %>
-    <h3><%= link_to product.name, product %></h3>
+    <% if name_is_link %>
+      <h3 class="title is-6"><%= link_to product.name, product %></h3>
+    <% else %>
+      <h3 class="title is-6"><%= product.name %></h3>
+    <% end %>
 
     <% if product.image.present? %>
         <%= image_tag product.image %>
