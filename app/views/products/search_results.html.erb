@@ -3,7 +3,7 @@
 <div class="block">
   <h3>Debug GET[]</h3>
   <p><%= params %></p>
-  <pre><%= @products.inspect %></pre>
+  <pre><%# @products.inspect %></pre>
 </div>
 
 <div class="block">
@@ -13,7 +13,7 @@
   <% else %>
     <p>You searched for '<%= params[:query] %>'.</p>
       <% unless params[:category].blank? %>
-        <p>Search filtered by category: <%= Category.find(params[:category]).name %></p>
+        <p>Search filtered by category: <%= Category.find(params[:category].to_i).name %></p>
       <% end %>
 
     <% if @products.empty?%>
@@ -22,7 +22,10 @@
       <p><%= pluralize(@products.size, "result")%> found.</p>
       <%= link_to "Back", products_index_path %>
       <div class="block">
-        <%= render @products %>
+        <%# render @products %>
+        <%= render partial: 'product',
+                    collection: @products,
+                    locals: {show_page: false} %>
       </div>
     <% end %>
   <% end %>
