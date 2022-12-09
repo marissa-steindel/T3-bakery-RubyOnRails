@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post 'products/add_to_cart/:id', to: "products#add_to_cart", as: "add_to_cart"
   delete 'products/remove_from_cart/:id', to: "products#remove_from_cart", as: "remove_from_cart"
   delete 'products/decrement_from_cart/:id', to: "products#decrement_from_cart", as: "decrement_from_cart"
+  get 'products/clear_cart', to: "products#clear_cart", as: "clear_cart"
   resources 'products', only: [:index, :show] do
     collection do
       get 'search_results'
