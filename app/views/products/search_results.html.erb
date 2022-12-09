@@ -7,28 +7,39 @@
 </div>
 
 <div class="block">
-  <% if params[:query].blank? %>
+  <%# invalid search %>
+  <% if params[:query].blank? && params[:category].blank?%>
     <p>Please try a valid search.</p>
-    <%= link_to "Back", products_index_path %>
-  <% else %>
+
+    <%# filter by category %>
+  <% elsif params[:commit] == "Filter"%>
+      <p>Displaying products in the category: <%= Category.find(params[:category].to_i).name %></p>
+
+  <%# keyword search %>
+  <% elsif params[:commit] == "Search"%>
     <p>You searched for '<%= params[:query] %>'.</p>
       <% unless params[:category].blank? %>
         <p>Search filtered by category: <%= Category.find(params[:category].to_i).name %></p>
       <% end %>
 
-    <% if @products.empty?%>
-      <p>No products found.</p>
-    <% else %>
-      <p><%= pluralize(@products.size, "result")%> found.</p>
-      <%= link_to "Back", products_index_path %>
-      <div class="block">
-        <%# render @products %>
-        <%= render partial: 'product',
-                    collection: @products,
-                    locals: {show_page: false} %>
-      </div>
-    <% end %>
   <% end %>
+
+
+  <% if @products.empty?%>
+    <p>No products found.</p>
+  <% else %>
+    <p><%= pluralize(@products.size, "result")%> found.</p>
+
+    <%= link_to "Back", products_index_path %>
+
+    <div class="block">
+      <%# render @products %>
+      <%= render partial: 'product',
+                  collection: @products,
+                  locals: {show_page: false} %>
+    </div>
+  <% end %>
+
   <%= link_to "Back", products_index_path %>
 </div>
 

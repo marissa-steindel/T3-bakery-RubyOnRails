@@ -3,19 +3,13 @@
 <%# category filter %>
 <div class="block">
   <p>Filter products by category:</p>
-  <%= select_tag :category, options_from_collection_for_select(Category.all, 'id', 'name') %>
-  <%# select_tag :category, options_from_collection_for_select(Category.all, 'name', 'name'), :onChange => filter_by_category() %>
-  <nav class="navbar">
-    <% Category.all.each do |c| %>
-      <%= link_to c.name, "#", :class=>"navbar-item" %>
-    <% end %>
-  </nav>
+  <%= render "filterform" %>
 </div>
 
 <%# search form %>
 <div class="block">
-    <p>Search products:</p>
-    <%= render "searchform" %>
+  <p>Search products:</p>
+  <%= render "searchform" %>
 </div>
 
 

@@ -15,23 +15,29 @@ class ProductsController < ApplicationController
 
   def search_results
 
-    # no category filter applied
-    if params[:category].empty?
-      @products = Product.where("name LIKE ?", "%#{params[:query]}%")
+    if params[:commit] == "Filter"
+      @products = Product.joins(:categories).where(categories: {id: params[:category].to_i}).distinct
+    end
 
-    # category filter applied
-    else
-      @products = Product.joins(:categories).where(categories: {id: params[:category]}).distinct
+    if params[:commit] == "Search"
+      # search without category filter
+      if params[:category].empty?
+        @products = Product.where("name LIKE ?", "%#{params[:query]}%")
+
+      # search with category filter
+      else
+        @products = Product.joins(:categories).where(categories: {id: params[:category]}.to_i).distinct
+      end
     end
 
   end
 
-  def filter_by_category(category)
+  def filter_by_category
     # retrieve from the product_categories join table
     # select product_id from product_categories where category_id is X
     # product.id = product_category= product_id
 
-    @products = Product.where( 'category LIKE ?', "%#{params[:category]}%" )
+    @products = Product.joins(:categories).where(categories: {id: params[:category]}).distinct
     # Product.join(:product_categories)
     # SELECT * FROM products JOIN product_categories ON product.id = product_categories.product_id
 
