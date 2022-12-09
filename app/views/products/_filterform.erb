@@ -1,4 +1,17 @@
 <%= form_with url: search_results_products_path, method: :get do |form| %>
-  <%= form.select :category, options_from_collection_for_select(Category.all, 'id', 'name') %>
+  <%= form.select :category, [options_from_collection_for_select(Category.all, 'id', 'name'),"onsale"] %>
   <%= form.submit "Filter" %>
 <% end %>
+
+<nav class="navbar">
+  <% Category.all.each do |c| %>
+    <%= link_to c.name, "filter_products_path/#{c.id}", :class=>"navbar-item" %>
+  <% end %>
+</nav>
+
+<nav class="navbar">
+    <%= link_to "New!", "#", :class=>"navbar-item" %>
+    <%= link_to "On Sale!", "#", :class=>"navbar-item" %>
+    <%= link_to "Recently Updated!", "#", :class=>"navbar-item" %>
+</nav>
+
