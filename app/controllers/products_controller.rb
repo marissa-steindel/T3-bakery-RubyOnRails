@@ -14,7 +14,16 @@ class ProductsController < ApplicationController
   end
 
   def search_results
-    @products = Product.where("name LIKE ?", "%#{params[:query]}%")
+
+    # no category filter applied
+    if params[:category].empty?
+      @products = Product.where("name LIKE ?", "%#{params[:query]}%")
+
+    # category filter applied
+    else
+      @products = Product.joins(:categories).where(categories: {id: params[:category]}).distinct
+    end
+
   end
 
   def filter_by_category(category)
@@ -63,6 +72,11 @@ class ProductsController < ApplicationController
       session[:cart][prod_key] -= 1
     end
 
+    redirect_to products_index_path
+  end
+
+  def clear_cart
+    session[:cart] = Hash.new
     redirect_to products_index_path
   end
 
