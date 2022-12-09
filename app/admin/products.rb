@@ -9,7 +9,9 @@ ActiveAdmin.register Product do
       row :description
       row :price
       row :image do |product|
-        image_tag url_for(product.image)
+        if product.image.present?
+          image_tag url_for(product.image)
+        end
       end
       row :categories do |product|
         product.categories.map {|p| p.name}.join(", ").html_safe
