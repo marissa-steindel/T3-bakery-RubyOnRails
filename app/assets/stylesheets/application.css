@@ -12,4 +12,67 @@
  *
  *= require_tree .
  *= require_self
- */
+*/
+
+
+@import url(https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Lexend+Peta:wght@200&family=Lexend:wght@200&family=Nanum+Gothic+Coding&family=Poiret+One&family=Urbanist:wght@300&display=swap);
+
+html
+{
+    font-family: 'Urbanist', sans-serif;
+    /* color: #211e22; */
+    margin: 0px;
+}
+
+p, li
+{
+  color: black;
+  font-family: 'Urbanist', sans-serif;
+
+}
+
+h1, h2, h3, h4, h5, h6
+{
+  font-family: 'Fredericka the Great', sans-serif;
+}
+
+body
+{
+  margin: 0px;
+  background-color: #989398;
+}
+
+header, footer
+{
+  background-color: #3a353b;
+  /* color: #fdf3e4; */
+}
+
+#hero
+{
+  display: flex;
+  background-image: url("patrick-fore-m9qWesqRN0M-unsplash-sliced.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0px -150px;
+  height: 130px;
+  align-items: center; /*vertical*/
+  justify-content: flex-start; /*horizontal*/
+}
+
+#hero p
+{
+  color: #fdf3e4;
+  font-family: 'Fredericka the Great', sans-serif;
+  font-size: 80px;
+  margin: 0px;
+  padding-left: 50px;
+}
+
+div#picbanner img
+{
+  width: 100px;
+  height: 100px;
+  margin: 0px 2px;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+}

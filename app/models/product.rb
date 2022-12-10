@@ -8,5 +8,5 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :product_categories, allow_destroy: true
 
   # pagination
-  paginates_per 5
+  paginates_per 8
 end

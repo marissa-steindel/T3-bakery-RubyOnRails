@@ -3,15 +3,15 @@
   <%= form.submit "Filter" %>
 <% end %>
 
-<nav class="navbar">
-  <% Category.all.each do |c| %>
-    <%= link_to c.name, "filter_products_path/#{c.id}", :class=>"navbar-item" %>
-  <% end %>
-</nav>
+<%# <nav class="navbar"> %>
+  <%# Category.all.each do |c| %>
+    <%# link_to c.name, "filter_products_path/#{c.id}", :class=>"navbar-item" %>
+  <%# end %>
+<%# </nav> %>
 
 <nav class="navbar">
-    <%= link_to "New!", "#", :class=>"navbar-item" %>
-    <%= link_to "On Sale!", "#", :class=>"navbar-item" %>
-    <%= link_to "Recently Updated!", "#", :class=>"navbar-item" %>
+  <%= link_to "New!", "#", :class=>"navbar-item" %>
+  <%= link_to "On Sale!", "#", :class=>"navbar-item" %>
+  <%= link_to "Recently Updated!", "#", :class=>"navbar-item" %>
 </nav>
 

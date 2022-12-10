@@ -26,20 +26,23 @@
 
 
 <%# display cart contents %>
+<%= render "cart_contents"%>
+
 <% unless @cart_contents.empty?%>
   <%= link_to "Checkout", checkout_path %>
+  <br>
   <%# button_to "Checkout", checkout_path, method: :post %>
   <%# button_to "Clear Cart", clear_cart_path, method: :delete %>
   <%# button_to "Clear Cart", clear_cart_path, method: :post %>
   <%= link_to "Clear Cart", clear_cart_path %>
-
 <% end %>
-<%= render "cart_contents"%>
 
-<%# render @products %>
-<%= render partial: 'product',
-            collection: @products,
-            locals: {show_page: false} %>
+<div class="columns is-multiline">
+  <%# render @products %>
+  <%= render partial: 'product',
+              collection: @products,
+              locals: {show_page: false} %>
+</div>
 
 <nav class="pagination">
   <p>
