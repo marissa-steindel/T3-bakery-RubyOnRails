@@ -6,12 +6,18 @@
     <h3 class="title is-6">Shopping Cart:</h3>
     <table class="table is-striped">
       <tr>
+        <th></th>
         <th>Item</th>
         <th>QTY</th>
         <th>Unit Price</th>
       </tr>
       <% @cart_contents.each do |p|%>
         <tr>
+          <td>
+            <% if p.image.present? %>
+              <%= image_tag p.image.variant(resize_to_fit: [50,50]) %>
+            <% end %>
+          </td>
           <td>
             <%= p.name %>
           </td>
@@ -29,7 +35,7 @@
         </tr>
       <% end %>
   </table>
-  <p><strong class="title is-6">Total:</strong> <%= number_to_currency @cart_subtotal %></p>
+  <p><strong class="title is-6">Subtotal:</strong> <%= number_to_currency @cart_subtotal %></p>
   <% end %>
 </div>
 

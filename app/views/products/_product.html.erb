@@ -10,9 +10,10 @@
     <% product.categories.each do |c| %>
       <span class="tag is-link is-light is-rounded"><%= c.name %></span>
     <% end %>
+    <br>
 
     <% if product.image.present? %>
-        <%= image_tag product.image %>
+        <%= image_tag product.image.variant(resize_to_fit: [150,150]) %>
     <% end %>
 
     <p><%= product.description %></p>
