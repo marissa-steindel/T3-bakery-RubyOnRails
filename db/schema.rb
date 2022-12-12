@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_21_174447) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_160525) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -83,6 +83,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_174447) do
     t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "status"
+    t.integer "reproduct_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["reproduct_id"], name: "index_orders_on_reproduct_id"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "name"
     t.text "content"
@@ -120,6 +130,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_174447) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "customers", "provinces"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "reproducts"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
 end
