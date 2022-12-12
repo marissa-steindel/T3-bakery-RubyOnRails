@@ -1,22 +1,15 @@
 Rails.application.routes.draw do
-  get 'orders/index'
-  get 'orders/show'
-  get 'checkout/checkout'
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
 
   root "pages#about"
 
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"
 
-  get 'categories/index'
-  get 'categories/show'
-
   get 'products/index'
   get "checkout", to: "products#checkout", as: "checkout"
+  get 'checkout/checkout'
   get "checkout/province", to: "products#determine_tax", as: "determine_tax"
+
   # get 'products/:id', to: "products#show", as: "product"
   post 'products/add_to_cart/:id', to: "products#add_to_cart", as: "add_to_cart"
   delete 'products/remove_from_cart/:id', to: "products#remove_from_cart", as: "remove_from_cart"
@@ -29,16 +22,24 @@ Rails.application.routes.draw do
     end
   end
 
+  # get 'orders/index'
+  # get 'orders/show'
 
+  # get 'categories/index'
+  # get 'categories/show'
 
-  get "customer/index"
+  # get "customers/index"
 
-  get 'provinces/index'
-  get 'provinces/show'
-  get "/provinces/:id", to: "provinces#show"
+  # get 'provinces/index'
+  # get 'provinces/show'
+  # get "/provinces/:id", to: "provinces#show"
 
   resources :customers
   resources :provinces
   resources :categories
+  resources :orders
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
 end
