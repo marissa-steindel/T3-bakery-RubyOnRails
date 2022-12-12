@@ -1,0 +1,13 @@
+<div class="block">
+
+<% if show_page %>
+  <h3 class="title is-6"><%= customer.name %></h3>
+<% else %>
+  <h3 class="title is-6"><%= link_to customer.name, customer %></h3>
+<% end %>
+
+  <p>username: <%= customer.username %></p>
+  <p>password: <%= customer.password %></p>
+  <p><%= customer.salt %></p>
+  <p>province: <%= customer.province.name %></p>
+</div>
