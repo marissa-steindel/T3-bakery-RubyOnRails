@@ -2,8 +2,23 @@
 
 <%# cart contents %>
 <%= render "cart_contents"%>
-<%= select_tag :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province", :onchange => remote_function(:url => {:controller => 'controller', :action => 'action'}) %>
 
+<%# tax selector %>
+<%= form_with url: "determine_tax_path", method: :post do |form| %>
+  <%= form.select :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province" %>
+  <%= form.submit "Calculate Tax" %>
+<% end %>
+<%# select_tag :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province", :onchange => remote_function(:url => {:controller => 'controller', :action => 'action'}) %>
+
+<div class="block">
+  <h3>Debug GET[]</h3>
+  <p><%= params %></p>
+  <pre><%# @products.inspect %></pre>
+</div>
+
+<% if params[:commit] == "Calculate Tax" %>
+tax calculating...
+<% end %>
 
 <div class="block">
   <p><%= link_to "Log In", "/#" %></p>
@@ -16,18 +31,18 @@
 
   <%= form_with url: "/#", method: :post do |form| %>
 
-  <%= form.label :customer_name, "Name" %>
-  <%= form.text_field :customer_name, :required => true %>
-  </br>
+    <%= form.label :customer_name, "Name" %>
+    <%= form.text_field :customer_name, :required => true %>
+    </br>
 
-  <%= form.label :address, "Address" %>
-  <%= form.text_field :address, :required => true %>
-  </br>
+    <%= form.label :address, "Address" %>
+    <%= form.text_field :address, :required => true %>
+    </br>
 
-  <%= form.label :province, "Province" %>
-  <%= form.select :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province" %>
-  </br>
+    <%= form.label :province, "Province" %>
+    <%= form.select :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province" %>
+    </br>
 
-  <%= form.submit "Proceed to Confirmation" %>
-<% end %>
+    <%= form.submit "Proceed to Confirmation" %>
+  <% end %>
 </div>

@@ -86,8 +86,8 @@ class ProductsController < ApplicationController
     redirect_to products_index_path
   end
 
-  def checkout
-
+  def determine_tax
+    @taxes = Tax.where(id: params[].to_i)
   end
 
   private
