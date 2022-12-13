@@ -2,13 +2,15 @@ Rails.application.routes.draw do
 
   root "pages#about"
 
+  get "customer/SignUp", to: "customers#add_customer", as: "add_customer"
+
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"
 
   get 'products/index'
   get "checkout", to: "products#checkout", as: "checkout"
   get 'checkout/checkout'
-  get "checkout/province", to: "products#determine_tax", as: "determine_tax"
+  post "checkout/province", to: "products#determine_tax", as: "determine_tax"
 
   # get 'products/:id', to: "products#show", as: "product"
   post 'products/add_to_cart/:id', to: "products#add_to_cart", as: "add_to_cart"

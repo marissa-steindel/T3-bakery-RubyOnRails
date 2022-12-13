@@ -1,0 +1,37 @@
+<h3 class="title is-6" >Create Customer:</h3>
+
+<div class="block">
+
+  <%= form_with url: "#", method: :post do |form| %>
+
+    <%= form.label :customer_name, "Username" %>
+    <%= form.text_field :customer_name, :required => true %>
+    </br>
+
+    <%= form.label :address, "password" %>
+    <%= form.text_field :address, :required => true %>
+    </br>
+
+    <%= form.submit "Create Customer Account" %>
+  <% end %>
+</div>
+
+<div class="block">
+
+  <%= form_with url: "#", method: :post do |form| %>
+
+    <%= form.label :customer_name, "Name" %>
+    <%= form.text_field :customer_name, :required => true %>
+    </br>
+
+    <%= form.label :address, "Address" %>
+    <%= form.text_field :address, :required => true %>
+    </br>
+
+    <%= form.label :province, "Province" %>
+    <%= form.select :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province" %>
+    </br>
+
+    <%= form.submit "Sign Up" %>
+  <% end %>
+</div>
