@@ -1,7 +1,6 @@
-<h1>Province Member</h1>
-  <%= link_to "Province Collection", provinces_path%>
+<h1 class="title is-3">Province Member</h1>
 
-  <h2><%= @province.name%></h2>
+  <h2 class="title is-6"><%= @province.name%></h2>
 
   <% unless @province.GST.nil? || @province.GST == 0 %>
     <p>GST: <%= @province.GST.to_i %>%</p>
