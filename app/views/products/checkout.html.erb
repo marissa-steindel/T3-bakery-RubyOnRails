@@ -11,7 +11,6 @@
 <%# select_tag :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province", :onchange => remote_function(:url => {:controller => 'controller', :action => 'action'}) %>
 
 <div class="block">
-  <h3>Debug GET[]</h3>
   <p><%= params %></p>
   <pre><%# @products.inspect %></pre>
 </div>
@@ -26,23 +25,4 @@ tax calculating...
 </div>
 
 <%# shipping information %>
-<div class="block">
-  <h3 class="title is-6" >Shipping Information:</h3>
-
-  <%= form_with url: "/#", method: :post do |form| %>
-
-    <%= form.label :customer_name, "Name" %>
-    <%= form.text_field :customer_name, :required => true %>
-    </br>
-
-    <%= form.label :address, "Address" %>
-    <%= form.text_field :address, :required => true %>
-    </br>
-
-    <%= form.label :province, "Province" %>
-    <%= form.select :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province" %>
-    </br>
-
-    <%= form.submit "Proceed to Confirmation" %>
-  <% end %>
-</div>
+<%= render "shipping_info_form" %>
