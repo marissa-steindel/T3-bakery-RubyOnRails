@@ -7,6 +7,7 @@ gem 'activeadmin'
 gem 'devise'
 gem 'kaminari'
 gem 'stripe'
+gem 'net-http'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
