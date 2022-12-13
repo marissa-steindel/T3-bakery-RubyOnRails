@@ -1,2 +1,5 @@
 <h1 class="title is-3">Orders Collection</h1>
-<%= render @orders %>
+
+<%= render partial: 'order',
+            collection: @orders,
+            locals: {show_page: false} %>

@@ -1,5 +1,11 @@
 <div class="block">
-  <h3 class="title is-6"><%= link_to order.id, order %></h3>
+
+  <% if show_page %>
+    <h3 class="title is-6"><%= order.id %></h3>
+  <% else %>
+    <h3 class="title is-6"><%= link_to order.id, order %></h3>
+  <% end %>
+
   <p>Customer: <%= link_to order.customer.name, order.customer %></p>
   <p>Purchase: <%# link_to order.product.name, order.product %></p>
   <%# order.products.each do |p| %>
