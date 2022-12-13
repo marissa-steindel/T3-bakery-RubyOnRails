@@ -3,9 +3,7 @@
 one:
   customer: one
   status: MyString
-  reproduct: one
 
 two:
   customer: two
   status: MyString
-  reproduct: two
