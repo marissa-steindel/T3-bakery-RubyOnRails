@@ -7,6 +7,7 @@
   <%= link_to "About", about_path, :class=>"navbar-item" %>
   <%= link_to "Contact Us", contact_path, :class=>"navbar-item" %>
   <%= link_to "Admin", admin_root_path, :class=>"navbar-item" %>
+  <%= link_to "Add Customer", admin_root_path, :class=>"navbar-item" %>
 </nav>
 <nav class="navbar is-warning">
     <%= link_to "Products Collection", products_path, :class=>"navbar-item" %>
@@ -16,5 +17,15 @@
     <%= link_to "Orders Collection", orders_path, :class=>"navbar-item" %>
   <%# select_tag(:category_id, options_for_select([['Lisbon', 1], ['Madrid', 2]])) %>
 </nav>
+
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul class="navbar-item">
+      <li><%= link_to params[:controller].capitalize, "#" %> </li>
+      <li><%= link_to params[:action].capitalize, "#" %> </li>
+      <% unless params[:id].nil? %>
+        <li><%= link_to params[:id].capitalize, "#" %> </li>
+      <% end %>
+    </ul>
+  </nav>
 
 
