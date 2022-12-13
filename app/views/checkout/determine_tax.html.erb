@@ -1,0 +1,34 @@
+<h3 class="title is-4">Checkout</h3>
+
+<%# cart contents %>
+<%= render "products/cart_contents"%>
+
+<p>Select Province to apply tax:</p>
+ <nav class="navbar">
+  <% Province.all.each do |p| %>
+    <%= link_to p.name, "checkout/province/#{p.id}", :class=>"navbar-item" %>
+  <% end %>
+ </nav>
+<br>
+<p>Tax for <%= @province.name %> applied.</p>
+
+<% unless @province.GST == 0 %>
+  <p>GST: <%= number_to_currency @GST_due %></p>
+<% end %>
+  <% unless @province.PST == 0 %>
+  <p>PST: <%= number_to_currency @PST_due %></p>
+<% end %>
+  <% unless @province.HST == 0 %>
+  <p>HST: <%= number_to_currency @HST_due %></p>
+<% end %>
+
+<p><strong class="title is-6">Grand Total:</strong> <%= number_to_currency @cart_grandtotal %></p>
+
+
+<div class="block">
+  <p><%= link_to "Log In", "/#" %></p>
+  <p><%= link_to "Sign Up", "/#" %></p>
+</div>
+
+<%# shipping information %>
+<%= render "products/shipping_info_form" %>

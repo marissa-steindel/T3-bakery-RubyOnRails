@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"
 
-  get 'products/index'
-  get "checkout", to: "products#checkout", as: "checkout"
-  get 'checkout/checkout'
-  post "checkout/province", to: "products#determine_tax", as: "determine_tax"
+  get "checkout", to: "checkout#index", as: "checkout"
+  get "checkout/province/:id", to: "checkout#determine_tax", as: "determine_tax"
 
+
+  get 'products/index'
   # get 'products/:id', to: "products#show", as: "product"
   post 'products/add_to_cart/:id', to: "products#add_to_cart", as: "add_to_cart"
   delete 'products/remove_from_cart/:id', to: "products#remove_from_cart", as: "remove_from_cart"
