@@ -1,2 +1,5 @@
 <h1 class="title is-3">Categories Collection</h1>
-<%= render @categories %>
+
+<%= render partial: 'category',
+            collection: @categories,
+            locals: {show_page: false} %>
