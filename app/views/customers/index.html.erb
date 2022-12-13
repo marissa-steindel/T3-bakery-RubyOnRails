@@ -1,5 +1,7 @@
 <h1 class="title is-3">Customers Collection</h1>
 
+<p> <%= link_to "Add New Customer", root_path %> </p>
+
 <%= render partial: 'customer',
             collection: @customers,
             locals: {show_page: false} %>
