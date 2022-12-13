@@ -86,12 +86,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_041240) do
   create_table "order_products", force: :cascade do |t|
     t.integer "qty"
     t.integer "price"
-    t.integer "Order_id", null: false
-    t.integer "Product_id", null: false
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["Order_id"], name: "index_order_products_on_Order_id"
-    t.index ["Product_id"], name: "index_order_products_on_Product_id"
+    t.index ["order_id"], name: "index_order_products_on_order_id"
+    t.index ["product_id"], name: "index_order_products_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -139,8 +139,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_041240) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "customers", "provinces"
-  add_foreign_key "order_products", "Orders"
-  add_foreign_key "order_products", "Products"
+  add_foreign_key "order_products", "orders"
+  add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
