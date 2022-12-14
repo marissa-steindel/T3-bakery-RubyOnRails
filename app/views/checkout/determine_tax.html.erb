@@ -6,7 +6,7 @@
 <p>Select Province to apply tax:</p>
  <nav class="navbar">
   <% Province.all.each do |p| %>
-    <%= link_to p.name, "checkout/province/#{p.id}", :class=>"navbar-item" %>
+    <%= link_to p.name, determine_tax_path(p.id), :class=>"navbar-item" %>
   <% end %>
  </nav>
 <br>
@@ -24,7 +24,7 @@
 
 <p><strong class="title is-6">Grand Total:</strong> <%= number_to_currency @cart_grandtotal %></p>
 
-
+<br>
 <div class="block">
   <p><%= link_to "Log In", "/#" %></p>
   <p><%= link_to "Sign Up", "/#" %></p>

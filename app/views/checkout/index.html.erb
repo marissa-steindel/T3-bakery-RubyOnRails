@@ -3,24 +3,14 @@
 <%# cart contents %>
 <%= render "products/cart_contents"%>
 
-<p><%= params %></p>
-<% if params[:province].blank? %>
-  <%# tax selector %>
-  <%= form_with url: "#", method: :get do |form| %>
-    <%= form.select :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province" %>
-    <%= form.submit "Calculate Tax" %>
-  <% end %>
-  <%# select_tag :province, options_from_collection_for_select(Province.all, 'id', 'name'), include_blank: "select province", :onchange => remote_function(:url => {:controller => 'controller', :action => 'action'}) %>
-<% else %>
-<% end %>
-
-<p>Select Province to apply tax:</p>
- <nav class="navbar">
-  <% Province.all.each do |p| %>
-    <%= link_to p.name, "checkout/province/#{p.id}", :class=>"navbar-item" %>
-  <% end %>
- </nav>
-
+<div class="block">
+  <p>Select Province to apply tax:</p>
+   <nav class="navbar">
+    <% Province.all.each do |p| %>
+      <%= link_to p.name, determine_tax_path(p.id), :class=>"navbar-item" %>
+    <% end %>
+   </nav>
+</div>
 
 <div class="block">
   <p><%= link_to "Log In", "/#" %></p>
