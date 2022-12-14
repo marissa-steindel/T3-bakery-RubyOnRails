@@ -9,26 +9,29 @@
     <%= link_to p.name, determine_tax_path(p.id), :class=>"navbar-item" %>
   <% end %>
  </nav>
-<br>
-<p>Tax for <%= @province.name %> applied.</p>
-
-<% unless @province.GST == 0 %>
-  <p>GST: <%= number_to_currency @GST_due %></p>
-<% end %>
-  <% unless @province.PST == 0 %>
-  <p>PST: <%= number_to_currency @PST_due %></p>
-<% end %>
-  <% unless @province.HST == 0 %>
-  <p>HST: <%= number_to_currency @HST_due %></p>
-<% end %>
-
-<p><strong class="title is-6">Grand Total:</strong> <%= number_to_currency @cart_grandtotal %></p>
 
 <br>
 <div class="block">
-  <p><%= link_to "Log In", "/#" %></p>
-  <p><%= link_to "Sign Up", "/#" %></p>
+  <p>Tax for <%= @province.name %> applied.</p>
+
+  <% unless @province.GST == 0 %>
+    <p>GST: <%= number_to_currency @GST_due %></p>
+  <% end %>
+    <% unless @province.PST == 0 %>
+    <p>PST: <%= number_to_currency @PST_due %></p>
+  <% end %>
+    <% unless @province.HST == 0 %>
+    <p>HST: <%= number_to_currency @HST_due %></p>
+  <% end %>
+
+  <p><strong class="title is-6">Grand Total:</strong> <%= number_to_currency @cart_grandtotal %></p>
+
+</div>
+
+<div class="block">
+  <p>Already have an account? <%= link_to "Log In", login_path %></p>
+  <p><%= link_to "Sign Up", new_customer_path %> to save your shipping information.</p>
 </div>
 
 <%# shipping information %>
-<%= render "products/shipping_info_form" %>
+<%= render "shipping_info_form" %>

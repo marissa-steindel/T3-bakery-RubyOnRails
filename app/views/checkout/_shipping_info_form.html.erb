@@ -1,0 +1,17 @@
+<div class="block">
+  <h3 class="title is-6" >Shipping Information:</h3>
+
+  <%= form_with url: "/#", method: :post do |form| %>
+
+    <%= form.label :customer_name, "Name", style: "display: block"  %>
+    <%= form.text_field :customer_name, :required => true %>
+
+    <%= form.label :address, "Address", style: "display: block"  %>
+    <%= form.text_field :address, :required => true %>
+
+    <%= form.label :province, "Province", style: "display: block"  %>
+    <%= form.select :province, options_from_collection_for_select(Province.all, 'id', 'code'), include_blank: "select province" , style: "display: block" %>
+
+    <%= form.submit "Proceed to Confirmation" %>
+  <% end %>
+</div>
