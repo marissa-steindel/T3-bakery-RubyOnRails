@@ -10,8 +10,8 @@
 <%# </nav> %>
 
 <nav class="navbar">
-  <%= link_to "New!", "#", :class=>"navbar-item" %>
-  <%= link_to "On Sale!", "#", :class=>"navbar-item" %>
-  <%= link_to "Recently Updated!", "#", :class=>"navbar-item" %>
+  <%= link_to "New!", "/products/search_results?filter=new", :class=>"navbar-item" %>
+  <%= link_to "On Sale!", "/products/search_results?filter=sale", :class=>"navbar-item" %>
+  <%= link_to "Recently Updated!","/products/search_results?filter=recent", :class=>"navbar-item" %>
 </nav>
 

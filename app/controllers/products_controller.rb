@@ -19,6 +19,24 @@ class ProductsController < ApplicationController
       @products = Product.joins(:categories).where(categories: {id: params[:category].to_i}).distinct
     end
 
+    unless params[:filter].blank?
+      days = 60
+      if params[:filter] == "new"
+        @filter_heading = "New Products!"
+        @filter_tagline = "Products posted in the last #{days} days."
+        @products = Product.where("created_at > ?", Time.now - days.day)
+      elsif params[:filter] == "sale"
+        @filter_heading = "On Sale!"
+        @filter_tagline = "Products whose price has been reduced in the last #{days} days."
+        @products = Product.where("created_at > ?", Time.now - days.day)
+      elsif params[:filter] == "recent"
+        days = 5
+        @filter_heading = "Recently Updated!"
+        @filter_tagline = "Products that have been updated in the last #{days} days."
+        @products = Product.where("updated_at > ?", Time.now - days.day)
+      end
+    end
+
     if params[:commit] == "Search"
       # search without category filter
       if params[:category].empty?
@@ -26,7 +44,8 @@ class ProductsController < ApplicationController
 
       # search with category filter
       else
-        @products = Product.joins(:categories).where(categories: {id: params[:category]}.to_i).distinct
+        @products = Product.joins(:categories).distinct
+        # @products = Product.where("name LIKE ?", "%#{params[:query]}%").joins(:categories).where(category: {id: params[:category]}.to_i).distinct
       end
     end
 
