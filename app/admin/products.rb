@@ -10,7 +10,7 @@ ActiveAdmin.register Product do
       row :price
       row :image do |product|
         if product.image.present?
-          image_tag url_for(product.image)
+          image_tag url_for(product.image.variant(resize_to_fit: [100,100]))
         end
       end
       row :categories do |product|
@@ -40,6 +40,8 @@ ActiveAdmin.register Product do
     column :price
     column :description
     column :categories
+    column :created_at
+    column :updated_at
     actions
   end
 
