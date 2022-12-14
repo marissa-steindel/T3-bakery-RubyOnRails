@@ -1,27 +1,43 @@
 <%= form_with(model: customer) do |form| %>
-  <% if customer.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+ <div>
+    <%= form.label :Name, style: "display: block" %>
+    <%= form.text_field :Name %>
+  </div>
+  <br>
 
-      <ul>
-        <% customer.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
+   <div>
     <%= form.label :username, style: "display: block" %>
     <%= form.text_field :username %>
   </div>
+  <br>
 
   <div>
     <%= form.label :password, style: "display: block" %>
     <%= form.text_field :password %>
   </div>
+  <br>
 
   <div>
-    <%= form.submit %>
+    <%= form.label :password_verification, style: "display: block" %>
+    <%= form.text_field :password_verification %>
   </div>
+  <br>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address %>
+  </div>
+  <br>
+
+  <div>
+    <%= form.label :province, "Province" , style: "display: block" %>
+    <%= form.select :province, options_from_collection_for_select(Province.all, 'id', 'code'), include_blank: "select province" %>
+  </div>
+  <br>
+
+  <div>
+    <%= form.submit "Create Account" %>
+  </div>
+  <br>
+
 <% end %>

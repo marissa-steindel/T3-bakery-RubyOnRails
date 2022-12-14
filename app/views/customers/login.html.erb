@@ -1,0 +1,18 @@
+<h1 class="title is-3">Log In</h1>
+
+<%= form_with(model: @customer) do |form| %>
+
+   <div>
+    <%= form.label :username, style: "display: block" %>
+    <%= form.text_field :username %>
+  </div>
+
+  <div>
+    <%= form.label :password, style: "display: block" %>
+    <%= form.text_field :password %>
+  </div>
+
+  <div>
+    <%= form.submit "Login" %>
+  </div>
+<% end %>

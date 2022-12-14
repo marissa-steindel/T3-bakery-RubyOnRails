@@ -7,7 +7,9 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
   end
 
-  def add_customer
+  def login
 
   end
+
+
 end
