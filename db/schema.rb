@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_13_020334) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_14_220612) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -71,6 +71,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_020334) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customer_orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "order_id", null: false
+    t.decimal "GST"
+    t.decimal "PST"
+    t.decimal "HST"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_orders_on_customer_id"
+    t.index ["order_id"], name: "index_customer_orders_on_order_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "username"
@@ -84,10 +96,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_020334) do
   end
 
   create_table "order_products", force: :cascade do |t|
-    t.integer "qty"
-    t.integer "price"
     t.integer "Order_id", null: false
     t.integer "Product_id", null: false
+    t.integer "qty"
+    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["Order_id"], name: "index_order_products_on_Order_id"
@@ -138,6 +150,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_020334) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "customer_orders", "customers"
+  add_foreign_key "customer_orders", "orders"
   add_foreign_key "customers", "provinces"
   add_foreign_key "order_products", "Orders"
   add_foreign_key "order_products", "Products"
