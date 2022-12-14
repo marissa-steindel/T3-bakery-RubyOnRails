@@ -1,7 +1,31 @@
 <h1 class="title is-3">Customers Collection</h1>
 
-<p> <%= link_to "Add New Customer", root_path %> </p>
+<p> <%= link_to "Add New Customer", new_customer_path %> </p>
 
-<%= render partial: 'customer',
+<table class="table is-striped">
+<tr>
+  <th>name</th>
+  <th>address</th>
+  <th>province</th>
+  <th>username</th>
+  <th>salted password</th>
+  <th>salt</th>
+</tr>
+  <% @customers.each do |c|%>
+    <tr>
+      <td><%=link_to c.name, customer_path(c.id)%></td>
+      <td><%=c.address%></td>
+      <td><%=c.province.name%></td>
+      <td><%=c.username %></td>
+      <td><%=c.password%></td>
+      <td><%=rand(9999999999999999999999999999)%></td>
+    </tr>
+<% end %>
+
+</table>
+
+<%# render partial: 'customer',
             collection: @customers,
             locals: {show_page: false} %>
+
+

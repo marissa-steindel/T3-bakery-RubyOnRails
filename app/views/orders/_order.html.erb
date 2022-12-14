@@ -1,9 +1,9 @@
 <div class="block">
 
   <% if show_page %>
-    <h3 class="title is-6"><%= order.id %></h3>
+    <h3 class="title is-6">Order ID: <%= order.id %></h3>
   <% else %>
-    <h3 class="title is-6"><%= link_to order.id, order %></h3>
+    <h3 class="title is-6"><%= link_to "Order ID: #{order.id}", order %></h3>
   <% end %>
 
   <p>Customer: <%= link_to order.customer.name, order.customer %></p>
