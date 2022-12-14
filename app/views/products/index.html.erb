@@ -12,30 +12,18 @@
   <%= render "searchform" %>
 </div>
 
-
-<%# <p>session class: </p><%= session[:cart].class %>
-<%# <p>Initialize session: </p><%= session[:cart] = {1 => 1, 2 => 2} %>
-<%# <p>session[:cart].keys.class:</p><%= session[:cart].keys.class %>
-<%# <p>session[:cart].keys.first.class:</p><%= session[:cart].keys.first.class %>
-<%# <p>params[:id]:</p><%= params[:id] %>
-<%# <p>Inspect session: </p><%= session[:cart].inspect %>
-<%# <p>Session is empty?: </p><%= session[:cart].empty? %>
-<%# <p>Load @cart_contents: </p><% @cart_contents = Product.find(session[:cart].keys) %>
-<%# <p>@cart_contents is empty?: </p><%= @cart_contents.empty? %>
-<%# <p>Inspect @cart_contents: </p><%= Product.find(session[:cart].keys).inspect %>
-
-
 <%# display cart contents %>
 <%= render "cart_contents"%>
 
-<% unless @cart_contents.empty?%>
-  <%= link_to "Checkout", checkout_path %>
-  <br>
-  <%# button_to "Checkout", checkout_path, method: :post %>
-  <%# button_to "Clear Cart", clear_cart_path, method: :delete %>
-  <%# button_to "Clear Cart", clear_cart_path, method: :post %>
-  <%= link_to "Clear Cart", clear_cart_path %>
-<% end %>
+<div class="block">
+  <% unless @cart_contents.empty?%>
+    <p><%= link_to "Checkout", checkout_path %></p>
+    <p><%# button_to "Checkout", checkout_path, method: :post %></p>
+    <%# button_to "Clear Cart", clear_cart_path, method: :delete %>
+    <%# button_to "Clear Cart", clear_cart_path, method: :post %>
+    <p><%= link_to "Clear Cart", clear_cart_path %></p>
+  <% end %>
+</div>
 
 <div class="columns is-multiline">
   <%# render @products %>
@@ -44,8 +32,8 @@
               locals: {show_page: false} %>
 </div>
 
-<nav class="pagination">
-  <p>
-    <%= paginate @products %>
-  </p>
+<nav class="pagination is-rounded">
+  <ul class="pagination-list">
+    <%= paginate @products, :class => "title is-4 pagination-link "%>
+  </ul>
 </nav>

@@ -1,9 +1,18 @@
 <div class="block">
 
-    <% if show_page %>
-    <h3 class="title is-6"><%= category.name %></h3>
-    <% else %>
-    <h3 class="title is-6"><%= link_to category.name, category %></h3>
-    <% end %>
+        <% if show_page %>
+            <h3 class="title is-6"><%= category.name %></h3>
+        <% else %>
+            <h3 class="title is-6"><%= link_to category.name, category %></h3>
+        <% end %>
+
+
+    <div class="content">
+        <ul>
+            <% category.products.each do |p|%>
+                <li><%= link_to p.name, product_path(p.id) %></li>
+            <%end%>
+        </ul>
+    </div>
 
 </div>
